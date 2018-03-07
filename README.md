@@ -1,4 +1,4 @@
-# Введение
+# Developer Handbook
 
-...introduction is in development...
+[Содержание](/SUMMARY.md)
 
