@@ -1,4 +1,4 @@
 # Developer Handbook
 
-[Содержание](/SUMMARY.md)
+[Содержание](/./SUMMARY.md)
 
