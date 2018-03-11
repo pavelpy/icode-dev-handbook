@@ -1,6 +1,6 @@
-# wkhtmltopdf-0.12.4
-Issue: проблема с кодировкой в centos 7 + wkhtmltopdf 0.12.4
-Solution: Ubuntu 16.04 LTS desktop + wkhtmltopdf 0.12.4 (with patched qt).
+# CentOS 7 + wkhtmltopdf 0.12.4 = проблема с кодировкой в PDF
+-------------------------------------------------------------
+Ubuntu 16.04 LTS desktop + wkhtmltopdf 0.12.4 (with patched qt).
 
 * Генерируем список репозиториев c помощью [Ubuntu Sources List Generator](https://repogen.simplylinux.ch/index.php)
 + Правим репозитории:
