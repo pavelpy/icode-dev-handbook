@@ -2,7 +2,8 @@
 
 * pycodestyle \(ex-pep8\);
 * flake8;
-* ast.
+* ast;
+* pylint?
 
 
 
