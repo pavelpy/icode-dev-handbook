@@ -1,4 +1,12 @@
-test[^3]  
+Hello {#id}
+-----
+
+# Hello {#id}
+
+# Hello # {#id}
+
+
+test[^1]  
 test2[^2]  
 sdfsdfsdf[^3]
 
