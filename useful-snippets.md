@@ -3,9 +3,9 @@
 
 ```python
 def to_str(bytes_or_str):
-    '''func that takes a str or bytes 
+    """func that takes a str or bytes 
     and always returns a str.
-    '''
+    """
 	if isinstance(bytes_or_str, bytes):
 		value = bytes_or_str.decode('utf-8')
 	else:
@@ -14,9 +14,9 @@ def to_str(bytes_or_str):
 
 
 def to_bytes(bytes_or_str):
-    ''' func that takes a str or bytes
+    """ func that takes a str or bytes
     and always returns a bytes
-    '''
+    """
     if isinstance(bytes_or_str, str):
         value = bytes_or_str.encode('utf-8')
     else:
@@ -28,9 +28,9 @@ def to_bytes(bytes_or_str):
 ```python
 # Python 2
 def to_unicode(unicode_or_str):
-    '''func that takes a str or unicode
+    """func that takes a str or unicode
     and always returns a unicode
-    '''
+    """
     if isinstance(unicode_or_str, str):
         value = unicode_or_str.decode('utf-8')
     else:
@@ -39,9 +39,9 @@ def to_unicode(unicode_or_str):
 
 # Python 2
 def to_str(unicode_or_str):
-    ''' that takes str or unicode 
+    """ that takes str or unicode 
     and always returns a str
-    '''
+    """
     if isinstance(unicode_or_str, unicode):
         value = unicode_or_str.encode('utf-8')
     else:
