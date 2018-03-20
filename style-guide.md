@@ -41,5 +41,9 @@ $ python -m mccabe --min 5 mccabe.py
 ("257:1: 'get_code_complexity'", 5)
 ```
 
+## Some tips
+* для определения количества объектов в памяти `gc`
+* \(Python 3.4+\) `tracemalloc` для более детального определения memory leak
+* \(Python 2\) `heapy` аналог `tracemalloc` с меньшей функциональностью
 
 
