@@ -30,4 +30,4 @@
 * Reference you Odoo Modules
 #### Be social
 * Just speak about you, Success Stories, Webinar, contribution, modules on all the Social Networks
-* 
+
