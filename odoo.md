@@ -1,4 +1,6 @@
 # Odoo
+## Odoo debug run
+`$ odoo/odoo-bin -d mail_create_lead --dev=all -c odoo.conf`
 ## Known problems
 * your text there :)
 ## 10 Common Mistakes Made by a New Partner
