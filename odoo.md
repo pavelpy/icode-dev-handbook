@@ -1,4 +1,6 @@
 # Odoo
+## Known problems
+* your text there :)
 ## 10 Common Mistakes Made by a New Partner
 ### 1. Low pricing
 ### 2. Fixed price commitment
