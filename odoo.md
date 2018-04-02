@@ -1,5 +1,29 @@
 # Odoo
+## Odoo install
+```
+apt-get install postgresql -y
+sudo apt install virtualenvwrapper
+source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+sudo apt install build-essential python3-dev libxslt-dev libzip-dev libldap2-dev libsasl2-dev
+mkvirtualenv -p /usr/bin/python3 odoo-venv
+$ cd your_odoo_sources_path
+$ pip install -r requirements.txt
+
+git clone https://github.com/odoo/odoo.git -b 11.0 --depth = 1 # Получить исходный код Odoo
+
+./odoo/setup/setup_dev.py setup_deps # Устанавливает системные зависимости Odoo
+$ ./odoo/setup/setup_dev.py setup_pg # Устанавливает PostgreSQL и db пользователя
+
+```
+
+When you you want to leave the virtual environment, just issue this command:
+`deactivate`
+Whenever you want to work again with your 'odoo-venv' environment:
+`workon odoo-venv`
+
 ## Odoo debug run
+
+
 `$ odoo/odoo-bin -d mail_create_lead --dev=all -c odoo.conf`
 ## Known problems
 * your text there :)
