@@ -87,7 +87,7 @@ As same through XML you can do the inherit the Odoo views (like Form view,Tree v
 Key point :
 
 The above two method can be apply on the Odoo server side and which you can change the behaviour of existing view or any other things you can change in Odoo views the effect with on your client side.
-
+[Ref](https://stackoverflow.com/questions/30712300/inheritance-in-openerp-odoo)
 
 
 
