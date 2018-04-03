@@ -25,8 +25,10 @@ Whenever you want to work again with your 'odoo-venv' environment:
 `$ odoo/odoo-bin -d mail_create_lead --dev=all -c odoo.conf`
 
 ## Работа с зависимостями
+```
 $ pip install pip-tools
 $ pip-dump
+```
 
 ## Наследование в Odoo
 
