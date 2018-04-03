@@ -20,9 +20,16 @@ When you you want to leave the virtual environment, just issue this command:
 Whenever you want to work again with your 'odoo-venv' environment:
 `workon odoo-venv`
 
-## Odoo debug run
+## Режим разработки сервера Odoo
 
 `$ odoo/odoo-bin -d mail_create_lead --dev=all -c odoo.conf`
+
+В Odoo 10 был добавлен новый вариант, обеспечивающий отличные возможности для разработчиков. 
+Чтобы использовать его, запустите экземпляр сервера с дополнительной опцией `--dev = all`.
+Это активирует несколько удобных функций которые ускорят наш цикл разработки. 
+Наиболее важными являются:
+* Автоматическая перезагрузка кода Python, как только файл Python будет сохранен, избегая ручного перезапуска сервера
+* Чтение view описаний непосредственно из файлов XML, избегая ручного обновления модулей
 
 ## Работа с зависимостями
 ```
