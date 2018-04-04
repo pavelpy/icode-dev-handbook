@@ -3,8 +3,80 @@
 Рекомендуется что бы dev окружение и prod окружение использовали приведённую ниже структуру каталога. Этот стандарт будет полезен, когда придётся выполнять операции по техническому обслуживанию, а так же облегчит повседневную работу.
 Рецепт приведённый ниже создаёт структуру каталогов, которая группирует файлы, имеющие аналогичные жизненные циклы или аналогичное назначение в стандартизированные подпапки. Структура может быть изменена но она должна быть задокументирована.
 
+Чтобы создать предложенный макет экземпляра, вам необходимо выполнить следующие действия:
+Создаём одну директорию для каждого экземпляра
+```
+$ mkdir ~/odoo-dev/projectname
+$ cd ~/odoo-dev/projectname
+```
+Создаём `virtualenv` в подпапке `env/`:
+`$ virtualenv -p python3 env`
+Создаём подпапки
+`$ mkdir src local bin filestore logs`
+Функции у папок следующие
+src/: содержит клон самого Odoo и различных сторонних проектов-аддонов
+local/: используется, чтобы сохранить специфичные для экземпляра аддоны
+bin/: включает в себя различные вспомогательные исполняемые сценарии оболочки
+filestore/: используется как хранилище файлов
+logs/ (опционально): используется для хранения лог файлов
 
+клонирование основного репозитория и установка вспомогательных модулей
+```
+$ git clone https://github.com/odoo/odoo.git src/odoo
+$ env/bin/pip3 install -r src/odoo/requirements.txt
+```
 
+Скрипт ниже записываем в bin/odoo
+```
+#!/bin/sh
+ROOT=$(dirname $0)/..
+PYTHON=$ROOT/env/bin/python3
+ODOO=$ROOT/src/odoo/odoo-bin
+$PYTHON $ODOO -c $ROOT/projectname.cfg "$@"
+exit $?
+```
+Добавляем права на выполнение
+`$ chmod +x bin/odoo`
+
+Создаём пустой фиктивный локальный модуль:
+```
+$ mkdir -p local/dummy
+$ touch local/dummy/__init__.py
+$ echo '{"name": "dummy", "installable": False}' >\ local/dummy/__manifest__.py
+```
+Создаём файл конфигурации для экземпляра:
+```
+$ bin/odoo --stop-after-init --save \
+ --addons-path src/odoo/odoo/addons,src/odoo/addons,local \
+ --data-dir filestore
+```
+Добавляем в  `.gitignore` игнор на `filestore/, env/, logs/` и `src/`:
+
+```
+# dotfiles, with exceptions:
+.*
+!.gitignore
+# python compiled files
+*.py[co]
+# emacs backup files
+*~
+# not tracked subdirectories
+/env/
+/src/
+/filestore/
+/logs/
+```
+Создаём репозиторий Git для этого экземпляра и добавляем файлы, которые добавили в git:
+
+```
+$ git init
+$ git add .
+$ git commit -m "initial version of projectname"
+```
+
+**Пояснения**
+Создаем чистую структуру каталогов с четко обозначенными каталогами и выделенными ролями; особенно, разделяем следующее:
+Код, поддерживаемый другими людьми (src/)
 
 ## Odoo install
 **todo** https://linuxize.com/post/install-odoo-11-on-ubuntu-16-04/
