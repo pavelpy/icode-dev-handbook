@@ -1,5 +1,7 @@
 # Odoo
 ## Odoo install
+**todo** https://linuxize.com/post/install-odoo-11-on-ubuntu-16-04/
+
 ```
 apt-get install postgresql -y
 sudo apt install virtualenvwrapper
@@ -77,6 +79,11 @@ $ pip-dump
 `$ ./odoo-bin -c project.cfg --without-demo=False --stop-after-init -i my_module`
 `$ ./odoo-bin -c project.cfg --test-enable --log-level=error --stop-after-init -u my_module`
 
+Ключевой частью этого рецепта является флаг командной строки `--test-enable`, который указывает Odoo на запуск тестов. Флаг `--stop-after-init` остановит экземпляр после запуска тестов, а `-u `обновит указанный модуль. Когда обновление (или установка) выполняется с включенными тестами, запускаются все протестированные модули модулей аддона \(это автоматически зависит от автоматически устанавливаемых зависимостей или обратных зависимостей\).
+
+
+Если тесты не выполняются, убедитесь, что у вас есть демо-данные для модуля; в файле конфигурации параметр `no_demo` должен быть `False`. Если есть сомнения, можно форсировать no_demo=false, запустив `UPDATE ir_module_module SET demo = true WHERE name = 'my_module'`.
+Можно запускать тесты, используя конфигурацию журнала `log-level = error -log-handler = odoo.modules.loading: INFO`. Это позволяет нам получать информацию о обрабатываемых файлах различных тестов, но не о деталях журналов операций, а только сообщения об ошибках.
 
 
 ## Наследование в Odoo
