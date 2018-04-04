@@ -40,7 +40,7 @@ Whenever you want to work again with your 'odoo-venv' environment:
 `workon odoo-venv`
 
 ## Режим разработки сервера Odoo
-```--dev=all --log-level=debug ```
+`--dev=all --log-level=debug `
 `$ odoo/odoo-bin -d mail_create_lead --dev=all -c odoo.conf`
 
 В Odoo 10 был добавлен новый вариант, обеспечивающий отличные возможности для разработчиков. 
@@ -50,11 +50,18 @@ Whenever you want to work again with your 'odoo-venv' environment:
 * Автоматическая перезагрузка кода Python, как только файл Python будет сохранен, избегая ручного перезапуска сервера
 * Чтение view описаний непосредственно из файлов XML, избегая ручного обновления модулей
 
+## Debug
+Для того чтобы установить уровень ведения журнала `my_module loggers` на `DEBUG` и 
+сохранить уровень журнала по умолчанию для других аддонов, можно запустить Odoo следующим образом:
+`python odoo.py --log-handler=odoo.addons.my_module:DEBUG`
+
 ## Работа с зависимостями
 ```
 $ pip install pip-tools
 $ pip-dump
 ```
+
+
 
 ## Наследование в Odoo
 
