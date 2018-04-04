@@ -72,6 +72,12 @@ $ pip-dump
 выходим из интерактивного режима с помощью `Ctrl + D`
 
 
+## Тестирование модуля
+Заполняем базу тестовыми данными
+`$ ./odoo-bin -c project.cfg --without-demo=False --stop-after-init -i my_module`
+`$ ./odoo-bin -c project.cfg --test-enable --log-level=error --stop-after-init -u my_module`
+
+
 
 ## Наследование в Odoo
 
