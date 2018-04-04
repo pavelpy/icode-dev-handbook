@@ -61,6 +61,16 @@ $ pip install pip-tools
 $ pip-dump
 ```
 
+## Интерактивная работа с Odoo
+`$ ./odoo-bin shell -c project.conf --log-level=error`
+
+`>>> product = env['product.product']`
+`>>> location_stock = env.ref('stock.stock_location_stock')`
+`>>> product.export_stock_level(location_stock)`
+Завершаем транзакцию перед выходом
+`>>> env.cr.commit()`
+выходим из интерактивного режима с помощью `Ctrl + D`
+
 
 
 ## Наследование в Odoo
