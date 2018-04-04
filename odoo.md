@@ -13,7 +13,26 @@ git clone https://github.com/odoo/odoo.git -b 11.0 --depth = 1 # Получит�
 
 ./odoo/setup/setup_dev.py setup_deps # Устанавливает системные зависимости Odoo
 $ ./odoo/setup/setup_dev.py setup_pg # Устанавливает PostgreSQL и db пользователя
+$ sudo createuser --superuser $(whoami)
+$ createdb demo
 ```
+
+some trash
+```
+sudo apt-get install -y git python3.5 postgresql nano virtualenv xz-utils wget fontconfig libfreetype6 libx11-6 libxext6 libxrender1 node-less node-clean-css xfonts-75dpi
+
+wget -O wkhtmltox.tar.xz https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz 
+
+sudo apt-get install -y gcc python3.5-dev libxml2-dev libxslt1-dev libevent-dev libsasl2-dev libssl1.0-dev libldap2-dev libpq-dev libpng-dev libjpeg-dev
+
+git config --global user.name "Your Name"
+
+python3 odoo-bin -d odoo-test --addons-path=addons --db-filter=odoo-test
+
+python3 odoo-bin -d odoo-test --addons-path=addons \ 
+--db-filter=odoo-test
+```
+
 
 When you you want to leave the virtual environment, just issue this command:
 `deactivate`
@@ -21,7 +40,7 @@ Whenever you want to work again with your 'odoo-venv' environment:
 `workon odoo-venv`
 
 ## Режим разработки сервера Odoo
-
+```--dev=all --log-level=debug ```
 `$ odoo/odoo-bin -d mail_create_lead --dev=all -c odoo.conf`
 
 В Odoo 10 был добавлен новый вариант, обеспечивающий отличные возможности для разработчиков. 
