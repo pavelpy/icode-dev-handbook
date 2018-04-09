@@ -272,3 +272,5 @@ The above two method can be apply on the Odoo server side and which you can chan
 #### Be social
 * Just speak about you, Success Stories, Webinar, contribution, modules on all the Social Networks
 
+## Useful links
+[How to add Chatter to an existing model](http://www.odooninja.com/add-chatter-existing-model/)
