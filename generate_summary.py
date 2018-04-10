@@ -57,6 +57,7 @@ def get_file_header(filename):
         first_line = f.readline().rstrip().lstrip('#').lstrip()
     return first_line
 
+
 def main():
     summary_files_checked = []
     summary_list_files = get_summary_list_files()
