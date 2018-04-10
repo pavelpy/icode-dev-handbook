@@ -71,7 +71,7 @@ def main():
 
     result_delta = list(set(get_book_files_without_ignored(basedir='./', file_ext='.md')) - set(summary_files_checked))
     result_delta.sort()
-    with open(SUMMARRY_FILENAME,'a') as summary_file:
+    with open(SUMMARRY_FILENAME, 'a') as summary_file:
         for fname in result_delta:
             line_to_add = "* [{1}]({0})".format(fname, get_file_header(fname))
             summary_file.write("\n{}".format(line_to_add))
