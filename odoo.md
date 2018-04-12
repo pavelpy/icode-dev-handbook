@@ -138,10 +138,30 @@ Whenever you want to work again with your 'odoo-venv' environment:
 * Автоматическая перезагрузка кода Python, как только файл Python будет сохранен, избегая ручного перезапуска сервера
 * Чтение view описаний непосредственно из файлов XML, избегая ручного обновления модулей
 
+## How to `--dev=all` works
+* When `.py` file is changed. Newer source code must be compiled to get the changes  ---->  Restart server
+* When `.xml` file is changed. Database records must be updated to get the change ----> Update (upgrade) your module
+* When `.js` file is changed.  Browser cache must be updated -----> Refresh web page
+
+
 ## Debug
 Для того чтобы установить уровень ведения журнала `my_module loggers` на `DEBUG` и 
 сохранить уровень журнала по умолчанию для других аддонов, можно запустить Odoo следующим образом:
 `python odoo.py --log-handler=odoo.addons.my_module:DEBUG`
+
+## Logging
+`_logger = logging.getLogger(__name__)`
+To write log messages in method code we can use:
+```
+_logger.info()
+_logger.debug()
+_logger.warning()
+_logger.exception()
+```
+
+## Вывод debug сообщений только для заданного модуля
+`python odoo.py --log-handler=odoo.addons.my_module:DEBUG`
+
 
 ## Работа с зависимостями
 ```
