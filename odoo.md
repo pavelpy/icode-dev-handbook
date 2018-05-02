@@ -294,3 +294,18 @@ The above two method can be apply on the Odoo server side and which you can chan
 
 ## Useful links
 [How to add Chatter to an existing model](http://www.odooninja.com/add-chatter-existing-model/)
+
+
+## About creating values when field is a one2many or many2many
+You cant create values in a many2many field just giving it the id (this is only for many2one). If the field is a one2many or many2many:
+```
+(0, 0, { values }) link to a new record that needs to be created with the given values dictionary
+(1, ID, { values }) update the linked record with id = ID (write values on it)
+(2, ID) remove and delete the linked record with id = ID (calls unlink on ID, that will delete the object completely, and the link to it as well)
+(3, ID) cut the link to the linked record with id = ID (delete the relationship between the two objects but does not delete the target object itself)
+(4, ID) link to existing record with id = ID (adds a relationship)
+(5) unlink all (like using (3,ID) for all linked records)
+(6, 0, [IDs]) replace the list of linked IDs (like using (5) then (4,ID) for each ID in the list of IDs)
+```
+
+So, what you should add is instead of a list, [(4, emp.employee_id.id)]
