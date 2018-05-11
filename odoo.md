@@ -309,3 +309,73 @@ You cant create values in a many2many field just giving it the id (this is only 
 ```
 
 So, what you should add is instead of a list, [(4, emp.employee_id.id)]
+
+## how to colorize line in list view
+
+For v9, colors are gone - replaced by the following decorators:
+decoration-bf - shows the line in BOLD
+decoration-it - shows the line in ITALICS
+decoration-danger - shows the line in LIGHT RED
+decoration-info - shows the line in LIGHT BLUE
+decoration-muted - shows the line in LIGHT GRAY
+decoration-primary - shows the line in LIGHT PURPLE
+decoration-success - shows the line in LIGHT GREEN
+decoration-warning - shows the line in LIGHT BROWN
+
+The formatting is dependent on the bootstrap style, and these can be combined (the colors look better when shown bold).
+
+
+## One2many many2one
+In OpenERP we can create many2one and one2many relationships between models very easily by creating many2one and one2many fields. You just need to declare a field in _columns and then using this field normally in the rest programming and views as we normally do.
+I created a small module to explain called hospital, I have two objects patient and doctor. To establish relationship between these two entities or objects, create doctor_id field in patient model as many2one, and patient_id as one2many in doctor model.
+The relationship can be explained as one doctor with many patients and many patients going to a single doctor.
+Now create a many2one field as:
+in class patient(osv.osv):
+```
+'doctor_id':fields.many2one('doctor','Doctor'),
+```
+and in class doctor(osv.osv):
+```
+'patient_id':fields.one2many('patient','doctor_id',),
+```
+
+
+# QWeb
+## diff between t-esc t-raw
+
+The difference is in HTML (code) parsing or not. When you use t-esc it will literally print out the value from the field you want to print. When you use t-raw in combination with an HTML field for example it will keep the content in HTML. If you would do a t-esc on an HTML field it will print your HTML code without interpreting it to actual code.
+For example you have a field with:
+`<p>My code</p>`
+If you would use t-raw it will be handled as HTML and so your `<p>` element won't be shown because it is converted. When you would do the same with t-esc it would literally print `<p>My code</p>` on your report.
+
+
+
+# Interesting parts
+
+```
+<t t-set="atts" t-value="product.get_variant_groups()"/>
+<t t-if='len(atts)'>
+    <h3 class="text-center mb32">Specifications for <t t-esc="product.name"/></h3>
+    <div class="row">
+        <div class='col-md-8 col-md-offset-2' id='product_specifications'>
+            <table class='table table-striped table-condensed table-hover'>
+                <t t-foreach="atts.keys()" t-as="spec">
+                    <t t-if="len(atts.keys())&gt;1">
+                        <tr class="success text-left breadcrumb clickable" data-toggle="collapse" t-att-data-target="'.'+spec.split()[0]">
+                            <th t-att-colspan="2"><t t-esc="spec"/></th>
+                        </tr>
+                    </t>
+                    <tr t-foreach="atts[spec]" t-as="att" t-att-class="'collapse in ' + spec.split()[0]">
+                        <td t-esc="att.attribute_id.name"/>
+                        <td>
+                            <t t-set='or_separator'>or</t>
+                            <t t-esc="(' %s ' % or_separator).join(att.value_ids.mapped('name'))"/>
+                        </td>
+                    </tr>
+                </t>
+            </table>
+        </div>
+    </div>
+</t>
+
+```
