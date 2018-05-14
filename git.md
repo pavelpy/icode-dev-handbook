@@ -48,3 +48,6 @@ git read-tree -mu HEAD
 ![In case of fire](./assets/in_case_of_fire.png)
 
 ![git_commit_amend_git_push_f](./assets/git_commit_amend_git_push_f.jpg)
+
+## Readthis
+http://git-scm.com/book/ru/v1/Инструменты-Git-Подмодули
