@@ -379,3 +379,155 @@ If you would use t-raw it will be handled as HTML and so your `<p>` element won'
 </t>
 
 ```
+
+## Refresh window by button
+```
+return {
+                'type': 'ir.actions.client',
+                'tag': 'reload',
+                }
+```
+
+## Complex domain
+```
+[
+                '|',
+                    '&',
+                        ('task_id.project_id.privacy_visibility', '=', 'portal'),
+                        ('task_id.project_id.message_partner_ids', 'child_of', [user.partner_id.commercial_partner_id.id]),
+                    '&',
+                        ('task_id.project_id.privacy_visibility', '=', 'portal'),
+                        ('task_id.message_partner_ids', 'child_of', [user.partner_id.commercial_partner_id.id]),
+            ]
+```
+
+## Compute from one currency to another currency
+```
+res = self.env['res.currency'].browse(FROM_CURRENCY).compute(move_line.amount_currency, move_line.company_id.currency_id)
+
+
+inv = self.env['account.invoice'].browse(invoice_id)
+currency = inv.currency_id.with_context(date=inv.date_invoice) # Invoice Currency
+company_currency = inv.company_id.currency_id  # Company Currency
+currency.compute(AMOUNT, company_currency)   # From Invoice Currency, amount is converted to Company's Currency
+```
+
+
+## Different between col and colspan?
+Every form view container (form itself, group, page, I think there are more) in OpenERP consists of 4 columns to start with.
+```<form>
+┌───┬───┬───┬───┐
+│ 1 │ 2 │ 3 │ 4 │
+└───┴───┴───┴───┘
+</form> 
+```
+Every <field> takes 2 columns: label & input field
+```
+<field name="input" />
+<field name="inpt2" />
+┌───────┬───────┬───────┬───────┐
+│ label │ input │ labl2 │ inpt2 │
+└───────┴───────┴───────┴───────┘ 
+```
+With colspan, you can widen items.
+```
+<field name="inpt4" colspan="4"/>
+<field name="input" />
+<field name="inpt2" />
+┌───────┬───────────────────────┐
+│ labl4 │ inpt4_______________  │
+├───────┼───────┬───────┬───────┤
+│ label │ input │ labl2 │ inpt2 │
+└───────┴───────┴───────┴───────┘
+
+<field name="input" />
+<field name="inpt4" colspan="4"/>
+<field name="inpt2" />
+
+┌───────┬───────┬───────┬───────┐
+│ label │ input │       │       │
+├───────┼───────┴───────┴───────┤
+│ labl4 │ inpt4_______________  │
+├───────┼───────┬───────┬───────┤
+│ labl2 │ inpt2 │       │       │
+└───────┴───────┴───────┴───────┘ 
+```
+When you add additional containers, like a page, you can tell OpenERP to use more or less columns.
+```
+<group col="2" colspan="2">
+    <field name="a" />
+    <field name="b" />
+</group>
+<group col="6" colspan="2">
+    <field name="d" />
+    <field name="e" />
+    <field name="f" />
+</group>
+│       │       │                │                │
+├───────┴───────┼────────────────┴────────────────┤
+│ ┌────┬───┐    │  ┌────┬───┬────┬───┬────┬───┐   │
+│ │ lb │ a │    │  │ lb │ d │ lb │ e │ lb │ f │   │
+│ ├────┼───┤    │  └────┴───┴────┴───┴────┴───┘   │
+│ │ lb │ b │    │                                 │
+│ └────┴───┘    │                                 │
+├───────┬───────┼────────────────┬────────────────┤
+│       │       │                │                │
+```
+
+## How to add popup window in odoo 11
+Необходимо добавить вьюху в манифест
+```
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <template id="assets_backend_2" name="crm assets 2" inherit_id="web.assets_backend">
+            <xpath expr="//script[last()]" position="after">
+                <!-- dialog assets -->
+                <script type="text/javascript" src="/ds_crm/static/src/js/my_dialog.js"></script>
+            </xpath>
+        </template>
+</odoo>
+```
+js в static/js
+```
+odoo.define('ds_crm.my_dialog', function(require){
+"user strict";
+
+var core = require('web.core');
+var session = require('web.session');
+
+var qweb = core.qweb;
+var mixins = core.mixins;
+var Widget = require('web.Widget');
+var rpc = require('web.rpc');
+var Dialog = require('web.Dialog');
+console.log('ds_crm_log');
+function ActionShowDialog(parent, action){
+    var dialog = new Dialog(document.body, {
+        title: "not implemented yet",
+        subtitle: "not implemented yet",
+        size: 'medium',
+        $content: "<div id='my_div'>not implemented yet</div>",
+        buttons: []
+    });
+    dialog.open();
+    setTimeout(function(){
+        dialog.close();
+        rpc.query({
+            model: 'ds_crm.lead',
+            method: 'my_dialog_func',
+            //args: [], //here pass parameters of python function
+        });
+    }, 3000);
+}
+
+    core.action_registry.add("show_my_dialog", ActionShowDialog);
+    console.log('ds_crm_log_2');
+});
+```
+```
+    @api.model
+    def my_dialog_func(self):
+        """необходимо для диалогового окна
+        """
+        pass
+```

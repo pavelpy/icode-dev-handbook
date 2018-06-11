@@ -51,3 +51,12 @@ $ python -m mccabe --min 5 mccabe.py
 * \(Python 2\) `heapy` аналог `tracemalloc` с меньшей функциональностью
 
 
+## Python other links
+- Code Style:
+  - [Python: практики для написания эффективного кода](https://proglib.io/p/efficient-python-practices/)
+  - [(Дзэн Питона) в примерах](http://www.russianlutheran.org/python/zen/zen.html)
+  - [PEP 8](https://pep8.ru/doc/pep8/) - *полезно почитать общие рекомендации*
+  - Советы от Google [часть 1](https://habrahabr.ru/post/179271/) [часть 2](https://habrahabr.ru/post/180509/)
+- Note:
+  - [27 шпаргалок по машинному обучению и Python в 2017](https://proglib.io/p/ds-cheatsheets/)
+  - [Python Exercises](https://www.ynonperek.com/2017/09/21/python-exercises/)

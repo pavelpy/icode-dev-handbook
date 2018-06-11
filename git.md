@@ -1,4 +1,9 @@
 # Git
+## Read this first
+[15 советов по работе с Github](https://habr.com/company/mailru/blog/359246/)
+
+
+
 ## Useful git alias
 ```
 alias.co checkout
