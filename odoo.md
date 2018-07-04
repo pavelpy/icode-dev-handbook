@@ -531,3 +531,70 @@ function ActionShowDialog(parent, action){
         """
         pass
 ```
+
+## How to get db name
+Login to your Odoo account
+Once you are logged in, you can find the Odoo database URL in the URL-bar.
+change the last part of the URL to `/web/database/selector`
+OR
+```
+db_serv_url = 'http://{}/xmlrpc/db'.format(host)
+sock = xmlrpclib.ServerProxy(db_serv_url)
+dbs = sock.list()
+print dbs 
+```
+
+## Add a button in header 
+`static/src/xml/invite_button.xml`
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<template xml:space="preserve">
+        <t t-extend="ListView.buttons">
+            <t  t-jquery="button.o_list_button_add" t-operation="after">
+                <button t-if="widget.modelName == 'res.users'" type="button" class="btn btn-primary btn-sm oe_filter_button">
+                Advanced Filters
+                </button>
+            </t>
+        </t>
+</template>
+```
+`claims_control/static/src/js/invite_button.js`
+```
+odoo.define('claims_control.invite_user_button', function (require) {
+"use strict";
+console.log('Yahho, INVITE BUTTON loaded Bitch!!!');
+
+    var get_eval_context = function(record){
+        return _.extend(
+            {},
+            record.attributes,
+            pyeval.context()
+        );
+    };
+
+    var ListController = require('web.ListController'),
+        pyeval = require('web.pyeval'),
+        py = window.py;
+
+    ListController.include({
+    renderButtons: function () {
+        this._super.apply(this, arguments);
+        if (this.$buttons) {
+            this.$buttons.find('button.oe_invite_button').on('click',this.proxy('do_the_job')) ;
+        }
+    },
+    do_the_job: function () {
+        var action = {
+            type: 'ir.actions.act_window',
+            view_type: 'form',
+            view_mode: 'tree,form',
+            res_model: 'claims_control.stage',
+            views: [[false, 'list'], [false, 'form']],
+            target: 'new'
+        };
+        this.do_action(action);
+    }
+});
+
+});
+```
