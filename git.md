@@ -56,3 +56,16 @@ git read-tree -mu HEAD
 
 ## Readthis
 http://git-scm.com/book/ru/v1/Инструменты-Git-Подмодули
+
+## Clone a branch without fetching other branches
+```
+mkdir $BRANCH
+cd $BRANCH
+git init
+git remote add -t $BRANCH -f origin $REMOTE_REPO
+git checkout $BRANCH
+```
+or
+```
+git clone --single-branch -b branch host:/dir.git
+```
